@@ -9,7 +9,7 @@ const tab = ref('login')
       <div class="bg-white rounded-lg shadow-lg text-left my-8 mx-2 max-w-lg w-full">
         <div class="p-4">
           <div class="flex justify-between items-center">
-            <p class="text-2xl font-bold">
+            <p class="text-xl font-bold">
               Your Account
             </p>
             <div
@@ -23,20 +23,20 @@ const tab = ref('login')
           <ul class="flex mb-4">
             <li class="flex-auto text-center">
               <a
-                href="#" class="block rounded p-3 transition"
+                href="#" class="block p-3 transition"
                 :class="{
-                  'hover:text-white text-white bg-sky-600': tab === 'login',
-                  'hover:text-sky-600': tab === 'register',
+                  'hover:text-teal-600 text-teal-600 border-b border-teal-600': tab === 'login',
+                  'hover:text-teal-600': tab === 'register',
                 }"
                 @click.prevent="tab = 'login'"
               >Login</a>
             </li>
             <li class="flex-auto text-center">
               <a
-                href="#" class="block rounded p-3 transition"
+                href="#" class="block p-3 transition"
                 :class="{
-                  'hover:text-white text-white bg-sky-600': tab === 'register',
-                  'hover:text-sky-600': tab === 'login',
+                  'hover:text-teal-600 text-teal-600 border-b border-teal-600': tab === 'register',
+                  'hover:text-teal-600': tab === 'login',
                 }"
                 @click.prevent="tab = 'register'"
               >
@@ -44,18 +44,10 @@ const tab = ref('login')
             </li>
           </ul>
 
-          <div v-if="tab === 'login'">
-            Login
-          </div>
+          <LoginForm v-if="tab === 'login'" />
           <div v-else>
             Register
           </div>
-        </div>
-
-        <div class="flex justify-end items-center p-4">
-          <button class="bg-blue-500 hover:bg-blue-700 px-3 py-1 rounded text-white">
-            Button
-          </button>
         </div>
       </div>
     </div>
