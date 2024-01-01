@@ -1,6 +1,6 @@
 <template>
   <div>
     Main
-    <BaseModal />
+    <AuthModal />
   </div>
 </template>
