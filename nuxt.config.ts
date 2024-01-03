@@ -20,4 +20,5 @@ export default defineNuxtConfig({
       ErrorMessage: 'VeeErrorMessage',
     },
   },
+  // ssr: false,
 })

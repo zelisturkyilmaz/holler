@@ -1,11 +1,14 @@
 import { configure, defineRule } from 'vee-validate'
-import { email, max, min, required } from '@vee-validate/rules'
+import { alpha_spaces, confirmed, email, max, min, not_one_of, required } from '@vee-validate/rules'
 
 export default defineNuxtPlugin(() => {
   defineRule('required', required)
   defineRule('email', email)
   defineRule('min', min)
   defineRule('max', max)
+  defineRule('alpha_spaces', alpha_spaces)
+  defineRule('not_one_of', not_one_of)
+  defineRule('confirmed', confirmed)
 
   configure({
     generateMessage: (ctx) => {
@@ -14,6 +17,9 @@ export default defineNuxtPlugin(() => {
         min: `The field ${ctx.field} is too short.`,
         max: `The field ${ctx.field} is too long.`,
         email: `The field ${ctx.field} must be a valid email.`,
+        alpha_spaces: `The field ${ctx.field} may only contain alphabetical characters and spaces.`,
+        not_one_of: `You are not allowed to use this value for the field ${ctx.field}.`,
+        confirmed: 'The passwords don\'t match.',
       }
 
       const message = messages[ctx.rule.name]
@@ -22,9 +28,7 @@ export default defineNuxtPlugin(() => {
 
       return message
     },
-    validateOnBlur: true,
-    validateOnChange: true,
+
     validateOnInput: true,
-    validateOnModelUpdate: true,
   })
 })
