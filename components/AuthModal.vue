@@ -15,7 +15,7 @@ const tab = ref('login')
             class="modal-close cursor-pointer"
             @click="modal.hideModal()"
           >
-            <Icon name="material-symbols:cancel" size="1.5rem" />
+            <Icon name="material-symbols:close" size="1.5rem" />
           </div>
         </div>
       </div>
