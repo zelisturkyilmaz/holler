@@ -1,6 +1,6 @@
 describe('Router', () => {
   it('renders home page', () => {
     cy.visit('/')
-    cy.contains('Welcome')
+    cy.get('h1').contains('Unleash')
   })
 })

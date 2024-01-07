@@ -4,7 +4,7 @@ const tab = ref('login')
 </script>
 
 <template>
-  <div class="fixed z-10 inset-0 flex justify-center items-start pt-24 bg-black bg-opacity-30 overflow-y-auto" @click.self="modal.hideModal()">
+  <div class="fixed z-10 inset-0 flex justify-center items-start pt-24 bg-black bg-opacity-30 overflow-y-auto" id="authModal" @click.self="modal.hideModal()">
     <div class="bg-white rounded-lg shadow-lg text-left my-8 mx-2 max-w-lg w-full">
       <div class="p-4">
         <div class="flex justify-between items-center">

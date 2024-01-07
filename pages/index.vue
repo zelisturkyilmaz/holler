@@ -1,5 +1,4 @@
 <template>
-  <main>
     <section class="mb-8 py-20 text-white text-center relative">
       <div class="absolute inset-0 w-full h-full bg-contain bg-[url('assets/img/header.png')] animate-slide -z-[1]"></div>
       <div class="container mx-auto">
@@ -16,5 +15,4 @@
         src="/assets/img/introduction-music.png"
       />
     </section>
-  </main>
 </template>
