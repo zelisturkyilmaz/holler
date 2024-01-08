@@ -22,7 +22,21 @@
         <Icon name="fa-solid:headphones-alt" size="2rem" />
       </div>
       <ol>
-        <NuxtLink class="p-3 pl-6 flex justify-between items-center hover:bg-gray-100 border-b " to="/song/1">
+        <NuxtLink class="p-3 pl-6 flex justify-between items-center hover:bg-gray-100 border-b song-link" to="/song/1">
+          <span>Song 1</span>
+          <div class="flex items-center">
+            <Icon name="fa-solid:comments" size="1.5rem" />
+            <span class="ml-1 text-lg">14</span>
+          </div>
+        </NuxtLink>
+        <NuxtLink class="p-3 pl-6 flex justify-between items-center hover:bg-gray-100 border-b song-link" to="/song/1">
+          <span>Song 1</span>
+          <div class="flex items-center">
+            <Icon name="fa-solid:comments" size="1.5rem" />
+            <span class="ml-1 text-lg">14</span>
+          </div>
+        </NuxtLink>
+        <NuxtLink class="p-3 pl-6 flex justify-between items-center hover:bg-gray-100 border-b song-link" to="/song/1">
           <span>Song 1</span>
           <div class="flex items-center">
             <Icon name="fa-solid:comments" size="1.5rem" />

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <AppHeader />
+    <Header />
     <slot></slot>
+
+    <Player />
   </div>
 </template>
