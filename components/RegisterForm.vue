@@ -6,7 +6,11 @@ const registerSchema = ref({
   confirm_password: 'confirmed:@password',
 })
 
-function register() {}
+const auth = useAuthStore()
+
+function register(values) {
+  auth.createUser(values.email, values.password)
+}
 </script>
 
 <template>
