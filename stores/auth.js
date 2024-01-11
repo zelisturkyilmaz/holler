@@ -1,21 +1,19 @@
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
 
 export const useAuthStore = defineStore('auth', () => {
-  const userCredential = ref()
+  const userCred = ref()
 
-  async function createUser(email, password) {
+  async function createUser(values) {
     const auth = getAuth()
+
     try {
-      userCredential.value = await createUserWithEmailAndPassword(auth, email, password)
+      userCred.value = await createUserWithEmailAndPassword(auth, values.email, values.password)
     }
-    catch (error) {
-      console.log(error)
-    }
-    return userCredential
+    catch (error) {}
   }
 
   return {
-    userCredential,
+    userCred,
     createUser,
   }
 })

@@ -1,20 +1,50 @@
 <script setup>
 const registerSchema = ref({
   name: 'required|min:3|max:100|alpha_spaces',
-  email: 'email: "required|min:3|max:100|email',
+  email: 'required|min:3|max:100|email',
   password: 'required|min:8|max:100|not_one_of:password',
   confirm_password: 'confirmed:@password',
 })
 
 const auth = useAuthStore()
+const modal = useModalStore()
 
-function register(values) {
-  auth.createUser(values.email, values.password)
+const reg_in_submission = ref(false)
+const reg_show_alert = ref(false)
+const reg_alert_variant = ref('bg-blue-500')
+const reg_alert_msg = ref('Please wait! Your account is being created.')
+
+async function register(values, { resetForm }) {
+  reg_show_alert.value = true
+  reg_in_submission.value = true
+  reg_alert_variant.value = 'bg-blue-500'
+  reg_alert_msg.value = 'Please wait! Your account is being created.'
+
+  try {
+    await auth.createUser(values)
+  }
+  catch (error) {
+    reg_in_submission.value = false
+    reg_alert_variant.value = 'bg-red-500'
+    reg_alert_msg.value = 'An unexpected error occurred. Please try again later.'
+    return
+  }
+
+  reg_alert_variant.value = 'bg-green-500'
+  reg_alert_msg.value = 'Success! Your account has been created.'
+  window.location.reload()
 }
 </script>
 
 <template>
   <div>
+    <div
+      v-if="reg_show_alert"
+      class="text-white text-center font-bold p-4 rounded mb-4"
+      :class="reg_alert_variant"
+    >
+      {{ reg_alert_msg }}
+    </div>
     <VeeForm :validation-schema="registerSchema" @submit="register">
       <div class="mb-3">
         <label class="mb-2 inline-block">Full Name</label>
@@ -57,6 +87,7 @@ function register(values) {
       <button
         type="submit"
         class="block w-full rounded bg-teal-700 text-white p-2 hover:bg-teal-600"
+        :disabled="reg_in_submission"
       >
         Submit
       </button>
