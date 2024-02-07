@@ -1,7 +1,7 @@
 /* eslint-disable curly */
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware((to) => {
   const authStore = useAuthStore()
-  if (from.path === '/manage' && !authStore.user && to.path === '/manage') {
+  if (!authStore.user && to.path === '/manage') {
     return navigateTo('/')
   }
 })

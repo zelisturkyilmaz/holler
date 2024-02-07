@@ -10,7 +10,7 @@ export const useAuthStore = defineStore('auth', () => {
       const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password)
       user.value = userCredential.user
       userLoggedIn.value = true
-      // await sendEmailVerification($auth.currentUser)
+      await sendEmailVerification(auth.currentUser)
     }
     catch (error) {}
   }

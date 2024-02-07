@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
-export default defineNuxtPlugin(async (nuxtApp) => {
+export default defineNuxtPlugin(async () => {
   const config = useRuntimeConfig()
   const { firebase } = config.public
   const app = initializeApp({ ...firebase })
@@ -9,7 +9,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
   const authStore = useAuthStore()
 
   const startAuthListener = () => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       onAuthStateChanged(auth, (user) => {
         if (user) {
           authStore.user = user
