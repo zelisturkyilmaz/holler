@@ -31,8 +31,10 @@ async function register(values, { resetForm }) {
   }
 
   reg_alert_variant.value = 'bg-green-500'
-  reg_alert_msg.value = 'Success! Your account has been created.'
-  window.location.reload()
+  reg_alert_msg.value = 'Success! Please verify your email.'
+  setTimeout(() => {}, 3000)
+  modal.hideModal()
+  resetForm()
 }
 </script>
 
