@@ -12,7 +12,9 @@ export const useAuthStore = defineStore('auth', () => {
       userLoggedIn.value = true
       await sendEmailVerification(auth.currentUser)
     }
-    catch (error) {}
+    catch (error) {
+      throw new Error('error')
+    }
   }
 
   async function signInUser(values) {
@@ -22,14 +24,21 @@ export const useAuthStore = defineStore('auth', () => {
       user.value = userCredential.user
       userLoggedIn.value = true
     }
-    catch (error) {}
+    catch (error) {
+      throw new Error('error')
+    }
   }
 
   async function signOutUser() {
     const auth = getAuth()
-    await signOut(auth)
-    user.value = null
-    userLoggedIn.value = false
+    try {
+      await signOut(auth)
+      user.value = null
+      userLoggedIn.value = false
+    }
+    catch (error) {
+      throw new Error('error')
+    }
   }
 
   return {
@@ -39,6 +48,4 @@ export const useAuthStore = defineStore('auth', () => {
     signInUser,
     signOutUser,
   }
-}, {
-  persist: true,
 })

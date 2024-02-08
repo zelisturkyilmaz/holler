@@ -5,14 +5,13 @@ const loginSchema = ref({
 })
 
 const auth = useAuthStore()
-const modal = useModalStore()
 
 const login_in_submission = ref(false)
 const login_show_alert = ref(false)
 const login_alert_variant = ref('bg-blue-500')
-const login_alert_msg = ref('Please wait! Your account is being created.')
+const login_alert_msg = ref('Please wait! We are logging you in')
 
-async function login(values, { resetForm }) {
+async function login(values) {
   login_show_alert.value = true
   login_in_submission.value = true
   login_alert_variant.value = 'bg-blue-500'
@@ -30,9 +29,7 @@ async function login(values, { resetForm }) {
 
   login_alert_variant.value = 'bg-green-500'
   login_alert_msg.value = 'Success! You are now logged in.'
-  setTimeout(() => {}, 3000)
-  modal.hideModal()
-  resetForm()
+  window.location.reload()
 }
 </script>
 
