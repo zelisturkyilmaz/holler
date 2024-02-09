@@ -2,7 +2,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@pinia/nuxt', 'nuxt-icon', '@vee-validate/nuxt'],
+  modules: ['@pinia/nuxt', 'nuxt-icon', '@vee-validate/nuxt', '@pinia-plugin-persistedstate/nuxt'],
   css: ['~/assets/css/main.css'],
   postcss: {
     plugins: {
@@ -29,8 +29,8 @@ export default defineNuxtConfig({
         projectId: process.env.NUXT_PUBLIC_PROJECT_ID,
         storageBucket: process.env.NUXT_PUBLIC_STORAGE_BUCKET,
         messagingSenderId: process.env.NUXT_PUBLIC_MESSAGING_SENDER_ID,
-        appId: process.env.NUXT_PUBLIC_APP_ID
-      }
-    }
+        appId: process.env.NUXT_PUBLIC_APP_ID,
+      },
+    },
   },
 })

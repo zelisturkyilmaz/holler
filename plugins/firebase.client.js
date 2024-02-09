@@ -1,3 +1,4 @@
+/* eslint-disable curly */
 import { initializeApp } from 'firebase/app'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
@@ -11,11 +12,9 @@ export default defineNuxtPlugin(() => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       authStore.user = user
-      authStore.userLoggedIn = true
     }
     else {
       authStore.user = null
-      authStore.userLoggedIn = false
     }
   })
 })
