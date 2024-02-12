@@ -1,5 +1,5 @@
 import { configure, defineRule } from 'vee-validate'
-import { alpha_spaces, confirmed, email, max, min, not_one_of, required } from '@vee-validate/rules'
+import { alpha_dash, alpha_spaces, confirmed, email, max, min, not_one_of, required } from '@vee-validate/rules'
 
 export default defineNuxtPlugin(() => {
   defineRule('required', required)
@@ -7,6 +7,7 @@ export default defineNuxtPlugin(() => {
   defineRule('min', min)
   defineRule('max', max)
   defineRule('alpha_spaces', alpha_spaces)
+  defineRule('alpha_dash', alpha_dash)
   defineRule('not_one_of', not_one_of)
   defineRule('confirmed', confirmed)
 
@@ -14,12 +15,13 @@ export default defineNuxtPlugin(() => {
     generateMessage: (ctx) => {
       const messages = {
         required: `The field ${ctx.field} is required.`,
-        min: `The field ${ctx.field} is too short.`,
+        min: `The field ${ctx.field} is too short. Should be minimum ${ctx.rule.params} characters`,
         max: `The field ${ctx.field} is too long.`,
         email: `The field ${ctx.field} must be a valid email.`,
         alpha_spaces: `The field ${ctx.field} may only contain alphabetical characters and spaces.`,
         not_one_of: `You are not allowed to use this value for the field ${ctx.field}.`,
         confirmed: 'The passwords don\'t match.',
+        alpha_dash: `The field may contain alphabetic characters, numbers, dashes, or underscores.`
       }
 
       const message = messages[ctx.rule.name]

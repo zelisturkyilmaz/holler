@@ -2,10 +2,8 @@
 definePageMeta({
   middleware: ['auth'],
 })
-
-const auth = useAuthStore()
 </script>
 
 <template>
-    <div>{{ auth.user }}</div>
+  <div>Settings</div>
 </template>

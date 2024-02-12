@@ -1,8 +1,9 @@
 <script setup>
 const registerSchema = ref({
-  name: 'required|min:3|max:100|alpha_spaces',
-  email: 'required|min:3|max:100|email',
-  password: 'required|min:8|max:100|not_one_of:password',
+  name: 'required|min:3|max:50|alpha_spaces',
+  display_name: 'required|min:3|max:50|alpha_dash',
+  email: 'required|min:3|max:50|email',
+  password: 'required|min:8|max:50|not_one_of:password',
   confirm_password: 'confirmed:@password',
 })
 
@@ -52,6 +53,14 @@ async function register(values) {
           class="block w-full border border-gray-400 rounded p-2 text-gray-800 focus:outline-none focus:border-black"
         />
         <VeeErrorMessage name="name" class="text-red-600" />
+      </div>
+      <div class="mb-3">
+        <label class="mb-2 inline-block">Display Name</label>
+        <VeeField
+          name="display_name" type="text"
+          class="block w-full border border-gray-400 rounded p-2 text-gray-800 focus:outline-none focus:border-black"
+        />
+        <VeeErrorMessage name="display_name" class="text-red-600" />
       </div>
       <div class="mb-3">
         <label class="mb-2 inline-block">Email</label>

@@ -1,24 +1,35 @@
-import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import { createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth'
+import { addDoc, collection } from 'firebase/firestore'
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref(null)
+  const nuxtApp = useNuxtApp()
 
   async function createUser(values) {
-    const auth = getAuth()
-    const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password)
+    const userCredential = await createUserWithEmailAndPassword(nuxtApp.$auth, values.email, values.password)
+
+    await sendEmailVerification(nuxtApp.$auth.currentUser)
+
+    await addDoc(collection(nuxtApp.$db, 'users'), {
+      name: values.name,
+      display_name: values.display_name,
+      email: values.email,
+    })
+
+    await updateProfile(nuxtApp.$auth.currentUser, {
+      displayName: values.display_name,
+    })
+
     user.value = userCredential.user
-    await sendEmailVerification(auth.currentUser)
   }
 
   async function signInUser(values) {
-    const auth = getAuth()
-    const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password)
+    const userCredential = await signInWithEmailAndPassword(nuxtApp.$auth, values.email, values.password)
     user.value = userCredential.user
   }
 
   async function signOutUser() {
-    const auth = getAuth()
-    await signOut(auth)
+    await signOut(nuxtApp.$auth)
     user.value = null
   }
 

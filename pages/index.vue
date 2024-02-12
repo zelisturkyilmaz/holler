@@ -4,14 +4,15 @@
 
 <template>
   <div>
-    <section class="mb-8 text-white text-center relative">
+    <section class="py-24  text-white text-center relative">
       <div class="absolute inset-0 w-full h-full bg-contain bg-[url('assets/img/header.png')] animate-slide -z-[1]"></div>
       <div class="container mx-auto">
-        <h1 class="font-bold text-4xl mb-5">
+        <h1 class="font-bold md:text-4xl text-2xl mb-5">
           Unleash Your Sound
         </h1>
-        <p class="w-9/12 mx-auto text-lg">
-          Welcome to Howler, where the language is music, and every beat tells a story. Step into a realm where sound knows no boundaries, and the rhythm is the universal language.
+
+        <p class="w-9/12 mx-auto md:text-lg">
+          Step into a realm where sound knows no boundaries, and the rhythm is the universal language.
         </p>
       </div>
 
