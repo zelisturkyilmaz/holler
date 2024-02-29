@@ -1,17 +1,27 @@
+<!-- eslint-disable style/padded-blocks -->
+<!-- eslint-disable no-useless-return -->
 <script setup>
+import { ref as storageRef, uploadBytesResumable } from 'firebase/storage'
+
 definePageMeta({
   middleware: ['auth'],
 })
 
-const drag_over = ref(false)
+const nuxtApp = useNuxtApp()
+
+const is_dragover = ref(false)
+const uploads = ref([])
 
 function upload($event) {
-  drag_over.value = false
+  is_dragover.value = false
+
   const files = $event.dataTransfer ? [...$event.dataTransfer.files] : [...$event.target.files]
-  files.forEach((file) => {
+  files.forEach(async (file) => {
     if (file.type !== 'audio/mpeg') return
 
-    console.log(file)
+    const fileRef = storageRef(nuxtApp.$storage, `songs/${file.name}`)
+    const uploadTask = uploadBytesResumable(fileRef, file)
+
   })
 }
 </script>
@@ -29,12 +39,14 @@ function upload($event) {
             <div class="p-6">
               <div
                 class="w-full px-10 py-20 mb-1 text-center text-gray-400 rounded border border-dashed border-gray-400 cursor-pointer hover:text-white hover:bg-green-400 hover:border-green-400 hover:border-solid transition duration-500"
-                :class="{ 'bg-green-400 border-green-400 border-solid': drag_over }"
-                @dragenter.prevent="drag_over = true"
-                @dragleave.prevent="drag_over = false"
-                @dragover.prevent="drag_over = true"
-                @dragend.prevent="drag_over = false"
-                @drop.prevent="upload($event)"
+                :class="{ 'bg-green-400 border-green-400 border-solid': is_dragover }"
+                @drag.prevent.stop=""
+                @dragstart.prevent.stop=""
+                @dragenter.prevent.stop="is_dragover = true"
+                @dragleave.prevent.stop="is_dragover = false"
+                @dragover.prevent.stop="is_dragover = true"
+                @dragend.prevent.stop="is_dragover = false"
+                @drop.prevent.stop="upload($event)"
               >
                 <h5>Drop your files here</h5>
               </div>
