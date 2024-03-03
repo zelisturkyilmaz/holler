@@ -12,6 +12,8 @@ export default antfu({
         svg: 'always',
         math: 'always',
       }],
+      'padded-blocks': 'off',
+      'no-useless-return': 'off',
     },
   },
 })

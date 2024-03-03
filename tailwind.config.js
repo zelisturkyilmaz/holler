@@ -18,12 +18,8 @@ export default {
         },
       },
       animation: {
-        slide: 'slide 50s linear infinite'
-      }
+        slide: 'slide 50s linear infinite',
+      },
     },
-  },
-  plugins: ['daisyui'],
-  daisyui: {
-    themes: ['light'],
   },
 }
