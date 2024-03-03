@@ -14,14 +14,14 @@ export default defineNuxtPlugin(() => {
   configure({
     generateMessage: (ctx) => {
       const messages = {
-        required: `The field ${ctx.field} is required.`,
+        required: `Field is required.`,
         min: `The field ${ctx.field} is too short. Should be minimum ${ctx.rule.params} characters`,
         max: `The field ${ctx.field} is too long.`,
         email: `The field ${ctx.field} must be a valid email.`,
         alpha_spaces: `The field ${ctx.field} may only contain alphabetical characters and spaces.`,
         not_one_of: `You are not allowed to use this value for the field ${ctx.field}.`,
         confirmed: 'The passwords don\'t match.',
-        alpha_dash: `The field may contain alphabetic characters, numbers, dashes, or underscores.`
+        alpha_dash: `The field may contain alphabetic characters, numbers, dashes, or underscores.`,
       }
 
       const message = messages[ctx.rule.name]

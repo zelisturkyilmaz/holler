@@ -1,13 +1,6 @@
 <script setup>
-const toggleDropdown = ref(false)
 const modal = useModalStore()
 const auth = useAuthStore()
-
-function closeDropdown() {
-  setTimeout(() => {
-    toggleDropdown.value = false
-  })
-}
 
 async function logout() {
   try {
@@ -35,19 +28,9 @@ async function logout() {
           <NuxtLink class="hover:text-amber-500" to="/manage">
             Manage
           </NuxtLink>
-          <div class="relative">
-            <button class="h-10 w-10 rounded-full ring-2 ring-gray-600 hover:ring-gray-400 bg-gray-500 flex items-center justify-center" @click.prevent="toggleDropdown = !toggleDropdown" @blur="closeDropdown">
-              <Icon name="fa-solid:user" />
-            </button>
-            <div class="absolute right-0 w-32 rounded-md shadow-lg bg-white ring-1 ring-gray-400 ring-opacity-10 p-2 mt-1 text-gray-600 text-center z-50 space-y-2" :class="{ hidden: !toggleDropdown }" >
-              <NuxtLink class="hover:text-amber-500 block pt-1" to="/settings">
-                Settings
-              </NuxtLink>
-              <button class="hover:text-amber-500 p-1" @click="logout">
-                Sign Out
-              </button>
-            </div>
-          </div>
+          <button class="hover:text-amber-500 p-1" @click="logout">
+            Sign Out
+          </button>
         </div>
       </nav>
     </header>

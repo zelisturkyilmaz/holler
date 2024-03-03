@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth'
-import { addDoc, collection } from 'firebase/firestore'
+import { doc, setDoc } from 'firebase/firestore'
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref(null)
@@ -10,7 +10,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     await sendEmailVerification(nuxtApp.$auth.currentUser)
 
-    await addDoc(collection(nuxtApp.$db, 'users'), {
+    await setDoc(doc(nuxtApp.$db, 'users', userCredential.user.uid), {
       name: values.name,
       display_name: values.display_name,
       email: values.email,
