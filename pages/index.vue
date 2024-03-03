@@ -1,5 +1,18 @@
 <script setup>
+import { collection, getDocs } from 'firebase/firestore'
 
+const nuxtApp = useNuxtApp()
+const songs = ref([])
+
+onMounted(async () => {
+  const songsSnap = await getDocs(collection(nuxtApp.$db, 'songs'))
+  songsSnap.forEach((doc) => {
+    songs.value.push({
+      docID: doc.id,
+      ...doc.data(),
+    })
+  })
+})
 </script>
 
 <template>
@@ -28,27 +41,7 @@
           <Icon name="fa-solid:headphones-alt" size="2rem" />
         </div>
         <ol>
-          <NuxtLink class="p-3 pl-6 flex justify-between items-center hover:bg-gray-100 border-b song-link" to="/song/1">
-            <span>Song 1</span>
-            <div class="flex items-center">
-              <Icon name="fa-solid:comments" size="1.5rem" />
-              <span class="ml-1 text-lg">14</span>
-            </div>
-          </NuxtLink>
-          <NuxtLink class="p-3 pl-6 flex justify-between items-center hover:bg-gray-100 border-b song-link" to="/song/1">
-            <span>Song 1</span>
-            <div class="flex items-center">
-              <Icon name="fa-solid:comments" size="1.5rem" />
-              <span class="ml-1 text-lg">14</span>
-            </div>
-          </NuxtLink>
-          <NuxtLink class="p-3 pl-6 flex justify-between items-center hover:bg-gray-100 border-b song-link" to="/song/1">
-            <span>Song 1</span>
-            <div class="flex items-center">
-              <Icon name="fa-solid:comments" size="1.5rem" />
-              <span class="ml-1 text-lg">14</span>
-            </div>
-          </NuxtLink>
+          <SongItem v-for="song in songs" :key="song.docID" :song="song" />
         </ol>
       </div>
     </section>
