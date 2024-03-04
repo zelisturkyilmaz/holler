@@ -13,13 +13,10 @@ async function logout() {
 
 <template>
   <div>
-    <div v-if="auth.user && !auth.user.emailVerified" class="text-white text-center p-2 bg-yellow-600">
-      Please verify your email
-    </div>
     <header class="bg-gray-700">
       <nav class="container mx-auto p-4 flex justify-between items-center text-white">
         <NuxtLink class="hover:text-amber-500 hover:transition hover:duration-300 hover:ease-in-out hover:-skew-x-12 font-bold uppercase text-2xl mr-4" to="/">
-          Howler
+          Holler
         </NuxtLink>
         <button v-if="!auth.user" class="hover:text-amber-500" @click="modal.showModal()">
           Login / Register

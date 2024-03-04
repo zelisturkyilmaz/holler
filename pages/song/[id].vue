@@ -15,6 +15,10 @@ onBeforeMount(async () => {
   getComments()
 })
 
+const email_alert = computed(() => {
+  return auth.user?.emailVerified ? '' : 'bg-gray-300'
+})
+
 const show_alert = ref(false)
 const in_submission = ref(false)
 const alert_variant = ref('bg-blue-500')
@@ -120,19 +124,27 @@ async function deleteComment(docId) {
           >
             {{ alert_message }}
           </div>
+
           <VeeForm v-if="auth.user" :validation-schema="commentSchema" @submit="addComment">
             <div class="mb-3">
               <label class="mb-2 inline-block">Comment:</label>
+              <div
+                v-if="!auth.user.emailVerified"
+                class="text-white text-center p-2 bg-amber-500 rounded-md mb-2"
+              >
+                Please verify your email to comment
+              </div>
               <VeeField
-                name="comment" as="textarea"
+                name="comment" as="textarea" :disabled="!auth.user?.emailVerified"
                 class="block w-full border border-gray-400 rounded p-2 text-gray-800 focus:outline-none focus:border-black"
+                :class="email_alert"
               />
               <VeeErrorMessage name="comment" class="text-red-600" />
             </div>
             <button
               type="submit"
-              class="py-1.5 px-3 rounded text-white bg-green-600 block"
-              :disabled="in_submission"
+              class="py-1.5 px-3 mx-2 rounded text-white bg-green-600 float-right"
+              :disabled="in_submission || !auth.user?.emailVerified"
             >
               Submit
             </button>
@@ -154,7 +166,7 @@ async function deleteComment(docId) {
         </div>
         <div class="flex">
           <p>{{ comment.content }}</p>
-          <button class="ml-auto self-end" @click="deleteComment(comment.docID)" v-if="comment.uid === auth?.user?.uid">
+          <button v-if="comment.uid === auth?.user?.uid" class="ml-auto self-end" @click="deleteComment(comment.docID)">
             <Icon name="fa6-solid:trash-can" class="text-red-600" />
           </button>
         </div>
