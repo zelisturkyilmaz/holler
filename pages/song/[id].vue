@@ -4,6 +4,7 @@ import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, updateDoc, 
 const route = useRoute()
 const nuxtApp = useNuxtApp()
 const auth = useAuthStore()
+const player = usePlayerStore()
 
 const song = ref({})
 const comments = ref([])
@@ -96,7 +97,7 @@ async function deleteComment(docId) {
     <section class="w-full mb-8 py-14 text-center text-white relative">
       <div class="absolute inset-0 w-full h-full bg-contain bg-[url('assets/img/song-header.png')] animate-slide -z-[1]"></div>
       <div class="container mx-auto flex items-center">
-        <button class="h-24 w-24 text-4xl bg-white text-black rounded-full flex items-center justify-center">
+        <button class="h-24 w-24 text-4xl bg-white text-black rounded-full flex items-center justify-center" @click.prevent="player.newSong(song)">
           <Icon name="fa6-solid:play" />
         </button>
         <div class="text-left ml-8">
